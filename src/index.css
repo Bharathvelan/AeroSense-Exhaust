@@ -47,3 +47,68 @@
   }
 }
 
+/* ============================================================
+   PRINT MEDIA STYLES FOR OFFICIAL ENGINEERING & AUDIT REPORTS
+   ============================================================ */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide sidebar, top navigation, operation banners, action controls, and toasts */
+  aside,
+  header,
+  nav,
+  .print\:hidden,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Unconstrain root application containers so print pagination flows cleanly */
+  .h-screen,
+  .w-screen,
+  .overflow-hidden,
+  .overflow-y-auto {
+    height: auto !important;
+    width: 100% !important;
+    overflow: visible !important;
+    position: static !important;
+    display: block !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Printable Report Document */
+  .printable-document {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    margin: 0 auto !important;
+    padding: 24px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  .printable-document * {
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+}

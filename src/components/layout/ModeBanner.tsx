@@ -7,7 +7,7 @@ export const ModeBanner: React.FC = () => {
 
   if (operatingMode === 'SIMULATION') {
     return (
-      <div className="bg-gradient-to-r from-cyan-950/70 via-[#0e1c33]/80 to-cyan-950/70 border-b border-cyan-500/30 px-6 py-2.5 flex flex-wrap items-center justify-between text-xs text-cyan-200">
+      <div className="bg-gradient-to-r from-cyan-950/70 via-[#0e1c33]/80 to-cyan-950/70 border-b border-cyan-500/30 px-6 py-2.5 flex flex-wrap items-center justify-between text-xs text-cyan-200 print:hidden">
         <div className="flex items-center gap-2.5 font-medium">
           <div className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-400/40">
             <Sparkles className="w-3 h-3" />
@@ -34,7 +34,7 @@ export const ModeBanner: React.FC = () => {
   // HARDWARE MODE
   if (!hardwareConnected) {
     return (
-      <div className="bg-gradient-to-r from-amber-950/80 via-slate-900 to-amber-950/80 border-b border-amber-500/30 px-6 py-2.5 flex flex-wrap items-center justify-between text-xs text-amber-200">
+      <div className="bg-gradient-to-r from-amber-950/80 via-slate-900 to-amber-950/80 border-b border-amber-500/30 px-6 py-2.5 flex flex-wrap items-center justify-between text-xs text-amber-200 print:hidden">
         <div className="flex items-center gap-2.5 font-medium">
           <div className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-400/40 animate-pulse">
             <AlertTriangle className="w-3 h-3" />
@@ -61,7 +61,7 @@ export const ModeBanner: React.FC = () => {
 
   // Hardware mode connected
   return (
-    <div className="bg-gradient-to-r from-emerald-950/70 via-slate-900 to-emerald-950/70 border-b border-emerald-500/30 px-6 py-2 flex flex-wrap items-center justify-between text-xs text-emerald-200">
+    <div className="bg-gradient-to-r from-emerald-950/70 via-slate-900 to-emerald-950/70 border-b border-emerald-500/30 px-6 py-2 flex flex-wrap items-center justify-between text-xs text-emerald-200 print:hidden">
       <div className="flex items-center gap-2.5 font-medium">
         <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
         <span className="font-bold tracking-wider uppercase font-mono text-emerald-300">

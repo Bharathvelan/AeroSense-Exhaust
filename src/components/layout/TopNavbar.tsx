@@ -54,7 +54,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ pageTitle }) => {
   }, []);
 
   return (
-    <header className="h-20 bg-[#0e1424]/90 backdrop-blur-md border-b border-slate-800/80 px-6 flex items-center justify-between sticky top-0 z-20">
+    <header className="h-20 bg-[#0e1424]/90 backdrop-blur-md border-b border-slate-800/80 px-6 flex items-center justify-between sticky top-0 z-20 print:hidden">
       {/* Left: Breadcrumb & Title */}
       <div className="flex flex-col">
         <div className="flex items-center gap-1.5 text-xs text-slate-400 font-mono">
