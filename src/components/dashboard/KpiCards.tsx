@@ -37,7 +37,7 @@ export const KpiCards: React.FC = () => {
   const isHumWarning = telemetry.humidity.value >= settings.humidity_warning_threshold && !isHumCritical;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-4">
       {/* CARD 1: TEMPERATURE */}
       <div 
         onClick={() => setActiveNav('monitoring')}
@@ -50,10 +50,10 @@ export const KpiCards: React.FC = () => {
             : "border-slate-800/80"
         )}
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
             <div className={cn(
-              "p-2 rounded-xl border",
+              "p-2 rounded-xl border shrink-0",
               isTempCritical 
                 ? "bg-red-500/20 border-red-500/30 text-red-400" 
                 : isTempWarning 
@@ -62,13 +62,13 @@ export const KpiCards: React.FC = () => {
             )}>
               <Thermometer className="w-4 h-4" />
             </div>
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">
+            <span className="text-xs font-semibold text-slate-300 uppercase tracking-wider font-mono truncate">
               Temperature
             </span>
           </div>
 
           <span className={cn(
-            "text-[10px] font-mono px-2 py-0.5 rounded-full uppercase font-bold",
+            "text-[10px] font-mono px-2 py-0.5 rounded-full uppercase font-bold shrink-0",
             isTempCritical 
               ? "bg-red-500/20 text-red-400 border border-red-500/30" 
               : isTempWarning 
@@ -85,17 +85,17 @@ export const KpiCards: React.FC = () => {
           </div>
 
           <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-800/60 text-[11px] text-slate-400 font-mono">
-            <span className="flex items-center gap-1">
+            <span className="flex items-center gap-1 capitalize">
               {telemetry.temperature.trend === 'rising' ? (
-                <TrendingUp className="w-3 h-3 text-red-400" />
+                <TrendingUp className="w-3.5 h-3.5 text-red-400" />
               ) : telemetry.temperature.trend === 'falling' ? (
-                <TrendingDown className="w-3 h-3 text-cyan-400" />
+                <TrendingDown className="w-3.5 h-3.5 text-cyan-400" />
               ) : (
-                <Minus className="w-3 h-3 text-slate-400" />
+                <Minus className="w-3.5 h-3.5 text-slate-400" />
               )}
               {telemetry.temperature.trend}
             </span>
-            <span>Range: {telemetry.temperature.min}° - {telemetry.temperature.max}°</span>
+            <span className="text-slate-400 font-medium">Span: {telemetry.temperature.min}° - {telemetry.temperature.max}°</span>
           </div>
         </div>
       </div>
@@ -112,10 +112,10 @@ export const KpiCards: React.FC = () => {
             : "border-slate-800/80"
         )}
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
             <div className={cn(
-              "p-2 rounded-xl border",
+              "p-2 rounded-xl border shrink-0",
               isHumCritical 
                 ? "bg-red-500/20 border-red-500/30 text-red-400" 
                 : isHumWarning 
@@ -124,13 +124,13 @@ export const KpiCards: React.FC = () => {
             )}>
               <Droplets className="w-4 h-4" />
             </div>
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">
-              Rel. Humidity
+            <span className="text-xs font-semibold text-slate-300 uppercase tracking-wider font-mono truncate">
+              Humidity
             </span>
           </div>
 
           <span className={cn(
-            "text-[10px] font-mono px-2 py-0.5 rounded-full uppercase font-bold",
+            "text-[10px] font-mono px-2 py-0.5 rounded-full uppercase font-bold shrink-0",
             isHumCritical 
               ? "bg-red-500/20 text-red-400 border border-red-500/30" 
               : isHumWarning 
@@ -160,7 +160,7 @@ export const KpiCards: React.FC = () => {
 
           <div className="flex items-center justify-between mt-2 pt-1 text-[11px] text-slate-400 font-mono">
             <span>Limit: {settings.humidity_warning_threshold}%</span>
-            <span className="text-cyan-400">{telemetry.humidity.trend}</span>
+            <span className="text-cyan-400 capitalize">{telemetry.humidity.trend}</span>
           </div>
         </div>
       </div>
@@ -170,23 +170,23 @@ export const KpiCards: React.FC = () => {
         onClick={() => setActiveNav('monitoring')}
         className="relative p-4 rounded-2xl bg-surface-card border border-slate-800/80 transition-all duration-300 hover:border-cyan-500/50 cursor-pointer group shadow-card-dark flex flex-col justify-between"
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
             <div className={cn(
-              "p-2 rounded-xl border",
+              "p-2 rounded-xl border shrink-0",
               telemetry.occupancy.detected 
                 ? "bg-cyan-500/20 border-cyan-500/40 text-cyan-300" 
                 : "bg-slate-800 border-slate-700 text-slate-400"
             )}>
               <Users className="w-4 h-4" />
             </div>
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">
+            <span className="text-xs font-semibold text-slate-300 uppercase tracking-wider font-mono truncate">
               Occupancy
             </span>
           </div>
 
           <span className={cn(
-            "text-[10px] font-mono px-2 py-0.5 rounded-full font-bold",
+            "text-[10px] font-mono px-2 py-0.5 rounded-full font-bold shrink-0",
             telemetry.occupancy.detected 
               ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 animate-pulse" 
               : "bg-slate-800 text-slate-400 border border-slate-700"
@@ -198,15 +198,15 @@ export const KpiCards: React.FC = () => {
         <div className="mt-3">
           <div className="text-xl lg:text-2xl font-extrabold text-white font-mono tracking-tight flex items-center gap-2">
             <span className={cn(
-              "w-3 h-3 rounded-full",
+              "w-3 h-3 rounded-full shrink-0",
               telemetry.occupancy.detected ? "bg-cyan-400 shadow-glow-cyan" : "bg-slate-600"
             )} />
-            {telemetry.occupancy.detected ? 'Occupied' : 'Unoccupied'}
+            <span>{telemetry.occupancy.detected ? 'Occupied' : 'Unoccupied'}</span>
           </div>
 
           <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-800/60 text-[11px] text-slate-400 font-mono">
             <span className="truncate">Radar: {telemetry.occupancy.sensor_type.toUpperCase()}</span>
-            <span className="text-[10px] text-slate-500">Live</span>
+            <span className="text-cyan-400 font-semibold">Active</span>
           </div>
         </div>
       </div>
@@ -216,17 +216,17 @@ export const KpiCards: React.FC = () => {
         onClick={() => setActiveNav('energy-analytics')}
         className="relative p-4 rounded-2xl bg-surface-card border border-slate-800/80 transition-all duration-300 hover:border-cyan-500/50 cursor-pointer group shadow-card-dark flex flex-col justify-between"
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 shrink-0">
               <Zap className="w-4 h-4" />
             </div>
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">
+            <span className="text-xs font-semibold text-slate-300 uppercase tracking-wider font-mono truncate">
               Electrical
             </span>
           </div>
 
-          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800/80 text-amber-400/90 border border-amber-500/20 font-bold uppercase">
+          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800/80 text-amber-400/90 border border-amber-500/20 font-bold uppercase shrink-0">
             {operatingMode === 'SIMULATION' ? 'Simulated' : 'Measured'}
           </span>
         </div>
@@ -237,8 +237,8 @@ export const KpiCards: React.FC = () => {
           </div>
 
           <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-800/60 text-[11px] text-slate-400 font-mono">
-            <span>Current: {formatCurrent(telemetry.power.current)}</span>
-            <span>Day: {formatEnergy(telemetry.power.daily_kwh)}</span>
+            <span>{formatCurrent(telemetry.power.current)}</span>
+            <span className="text-slate-300 font-medium">Day: {telemetry.power.daily_kwh.toFixed(2)} kWh</span>
           </div>
         </div>
       </div>
@@ -248,23 +248,23 @@ export const KpiCards: React.FC = () => {
         onClick={() => setActiveNav('fan-control')}
         className="relative p-4 rounded-2xl bg-surface-card border border-slate-800/80 transition-all duration-300 hover:border-cyan-500/50 cursor-pointer group shadow-card-dark flex flex-col justify-between"
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
             <div className={cn(
-              "p-2 rounded-xl border",
+              "p-2 rounded-xl border shrink-0",
               telemetry.fan.state !== 'OFF' 
                 ? "bg-cyan-500/20 border-cyan-500/40 text-cyan-300" 
                 : "bg-slate-800 border-slate-700 text-slate-400"
             )}>
               <Fan className={cn("w-4 h-4", telemetry.fan.state !== 'OFF' ? "animate-spin-medium" : "")} />
             </div>
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">
+            <span className="text-xs font-semibold text-slate-300 uppercase tracking-wider font-mono truncate">
               Exhaust Fan
             </span>
           </div>
 
           <span className={cn(
-            "text-[10px] font-mono px-2 py-0.5 rounded-full font-bold uppercase",
+            "text-[10px] font-mono px-2 py-0.5 rounded-full font-bold uppercase shrink-0",
             telemetry.fan.state !== 'OFF' 
               ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30" 
               : "bg-slate-800 text-slate-400 border border-slate-700"
@@ -282,8 +282,8 @@ export const KpiCards: React.FC = () => {
           </div>
 
           <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-800/60 text-[11px] text-slate-400 font-mono">
-            <span>Actuator: {telemetry.fan.actuator_connected ? 'Driver OK' : 'Simulated'}</span>
-            <span className="text-cyan-400 font-semibold">{telemetry.fan.command_status}</span>
+            <span className="truncate">Driver: {telemetry.fan.actuator_connected ? 'Active' : 'Sim'}</span>
+            <span className="text-emerald-400 font-semibold">{telemetry.fan.command_status}</span>
           </div>
         </div>
       </div>
@@ -293,17 +293,17 @@ export const KpiCards: React.FC = () => {
         onClick={() => setActiveNav('devices')}
         className="relative p-4 rounded-2xl bg-surface-card border border-slate-800/80 transition-all duration-300 hover:border-cyan-500/50 cursor-pointer group shadow-card-dark flex flex-col justify-between"
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 shrink-0">
               <Activity className="w-4 h-4" />
             </div>
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">
+            <span className="text-xs font-semibold text-slate-300 uppercase tracking-wider font-mono truncate">
               System Health
             </span>
           </div>
 
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 font-bold">
+          <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 font-bold shrink-0">
             {telemetry.system.health_score}%
           </span>
         </div>
