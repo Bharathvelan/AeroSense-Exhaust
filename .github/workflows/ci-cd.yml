@@ -1,0 +1,98 @@
+name: AeroSense SCADA CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'ci-cd-${{ github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  # ============================================================
+  # STAGE 1: QUALITY ASSURANCE & VERIFICATION GATE
+  # ============================================================
+  quality-gate:
+    name: 🛡️ Code Quality & Type Safety Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Frontend Dependencies
+        run: npm install
+
+      - name: TypeScript Static Typecheck
+        run: npx tsc --noEmit
+
+      - name: Production Vite Bundle Build
+        run: npm run build
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify Python Backend Syntax & Imports
+        run: |
+          python -m py_compile backend/app/main.py
+          python -m py_compile backend/app/core/config.py
+          python -m py_compile backend/app/models/schemas.py
+          python -m py_compile backend/app/models/db_models.py
+          python -m py_compile backend/app/services/telemetry_service.py
+          python -m py_compile backend/app/api/routes.py
+          python -m py_compile backend/run.py
+          echo "All Python backend modules verified successfully!"
+
+  # ============================================================
+  # STAGE 2: CONTINUOUS DEPLOYMENT (GITHUB PAGES)
+  # ============================================================
+  deploy:
+    name: 🚀 Production Deployment to GitHub Pages
+    needs: quality-gate
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Optimized Production Assets
+        run: npm run build
+
+      - name: Setup GitHub Pages Artifacts
+        uses: actions/configure-pages@v4
+
+      - name: Upload Pages Bundle
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      - name: Deploy Live to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

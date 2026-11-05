@@ -12,6 +12,9 @@ import {
   RecentAlertsStream 
 } from '../components/dashboard/RecentAlertsStream';
 import { 
+  TelemetryConsole 
+} from '../components/dashboard/TelemetryConsole';
+import { 
   Radio, 
   ShieldCheck, 
   Cpu, 
@@ -157,6 +160,9 @@ export const OverviewPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Real-time MQTT / WebSocket Live Bus Console */}
+      <TelemetryConsole />
     </div>
   );
 };

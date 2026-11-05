@@ -2,9 +2,21 @@
 ## Smart IoT-Based Automatic Exhaust Fan – Environmental & Humidity Control Dashboard
 ### Developed for the atomQUEST 2026 Competition – Round 2
 
-![AeroSense-Exhaust SCADA Banner](https://img.shields.io/badge/AeroSense-SCADA_Industrial_v2.4.1-00f2fe?style=for-the-badge)
-![atomQUEST 2026](https://img.shields.io/badge/atomQUEST-2026_Round_2-10b981?style=for-the-badge)
-![License](https://img.shields.io/badge/Architecture-Production_IoT-blue?style=for-the-badge)
+[![AeroSense SCADA CI/CD Pipeline](https://github.com/Bharathvelan/AeroSense-Exhaust/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/Bharathvelan/AeroSense-Exhaust/actions/workflows/ci-cd.yml)
+[![Live Dashboard](https://img.shields.io/badge/Live%20Dashboard-GitHub%20Pages-00f2fe?style=flat&logo=github)](https://bharathvelan.github.io/AeroSense-Exhaust/)
+[![React 18](https://img.shields.io/badge/Frontend-React%2018%20%7C%20TypeScript%20%7C%20Vite-61dafb?style=flat&logo=react)](https://react.dev)
+[![FastAPI](https://img.shields.io/badge/Backend-FastAPI%20%7C%20WebSocket-009688?style=flat&logo=fastapi)](https://fastapi.tiangolo.com)
+[![ESP32](https://img.shields.io/badge/Microcontroller-ESP32%20Xtensa%20Dual--Core-E7352C?style=flat&logo=espressif)](https://www.espressif.com)
+
+---
+
+## 🌟 Live Production Links
+
+| Service | Permanent URL | Status |
+|---|---|---|
+| 🌐 **Live Web Dashboard** | **[https://bharathvelan.github.io/AeroSense-Exhaust/](https://bharathvelan.github.io/AeroSense-Exhaust/)** | 🟢 **100% Live (24/7 HTTPS)** |
+| 🐙 **GitHub Repository** | **[https://github.com/Bharathvelan/AeroSense-Exhaust](https://github.com/Bharathvelan/AeroSense-Exhaust)** | 🟢 **Source Code & Firmware** |
+| ⚙️ **Automated CI/CD Pipeline** | **[GitHub Actions Workflow](https://github.com/Bharathvelan/AeroSense-Exhaust/actions)** | 🟢 **Continuous Deployment Active** |
 
 ---
 

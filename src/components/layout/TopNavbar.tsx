@@ -10,10 +10,13 @@ import {
   User, 
   ChevronRight,
   RotateCw,
-  ExternalLink
+  ExternalLink,
+  Search,
+  Command
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { cn } from '../../utils/cn';
+import { CommandPalette } from '../dashboard/CommandPalette';
 
 interface TopNavbarProps {
   pageTitle: string;
@@ -32,6 +35,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ pageTitle }) => {
   } = useApp();
 
   const [currentTime, setCurrentTime] = useState<string>('');
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
   useEffect(() => {
     const update = () => {
@@ -69,7 +73,20 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ pageTitle }) => {
       </div>
 
       {/* Right Controls */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
+        {/* Quick Command Palette Trigger (Ctrl+K) */}
+        <button
+          onClick={() => setIsCommandPaletteOpen(true)}
+          className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 text-slate-400 hover:text-cyan-300 font-mono text-xs transition-all shadow-sm group"
+          title="Open SCADA Command Palette (Ctrl+K)"
+        >
+          <Search className="w-3.5 h-3.5 text-cyan-400 group-hover:scale-110 transition-transform" />
+          <span>Quick Actions</span>
+          <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-[10px] text-slate-300 font-bold">
+            Ctrl+K
+          </kbd>
+        </button>
+
         {/* Real-time Clock */}
         <div className="hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-300 font-mono text-xs shadow-inner">
           <Clock className="w-3.5 h-3.5 text-cyan-400" />
@@ -159,6 +176,12 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ pageTitle }) => {
           </div>
         </div>
       </div>
+
+      {/* Global SCADA Command Palette Modal */}
+      <CommandPalette 
+        isOpen={isCommandPaletteOpen} 
+        onClose={() => setIsCommandPaletteOpen(false)} 
+      />
     </header>
   );
 };
