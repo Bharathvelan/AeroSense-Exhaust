@@ -2,7 +2,7 @@ import asyncio
 import json
 import random
 from datetime import datetime, timezone
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Literal
 from fastapi import WebSocket
 from app.models.schemas import TelemetryPayload, TemperatureReading, HumidityReading, OccupancyReading, PowerReading, FanStatus, SystemNodeStatus
 
@@ -21,8 +21,8 @@ class TelemetryManager:
         self.sim_hum = 64.0
         self.sim_occupied = True
         self.sim_fan_speed = 65
-        self.sim_fan_state = "AUTO"
-        self.sim_fan_mode = "AUTO"
+        self.sim_fan_state: Literal["OFF", "ON", "LOW", "MEDIUM", "HIGH", "AUTO"] = "AUTO"
+        self.sim_fan_mode: Literal["AUTO", "MANUAL"] = "AUTO"
         self.uptime = 48000
         self.daily_kwh = 0.85
 

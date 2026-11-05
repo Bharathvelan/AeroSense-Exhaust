@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends, Query
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Literal, cast
 from datetime import datetime, timezone
 from app.models.schemas import (
     TelemetryPayload, 
@@ -139,7 +139,7 @@ def get_fan_status():
 async def post_fan_control(command: FanControlCommand):
     if telemetry_manager.latest_telemetry:
         telemetry_manager.latest_telemetry.fan.state = command.state
-        telemetry_manager.latest_telemetry.fan.mode = command.mode or "MANUAL"
+        telemetry_manager.latest_telemetry.fan.mode = cast(Literal["AUTO", "MANUAL"], command.mode or "MANUAL")
         telemetry_manager.latest_telemetry.fan.speed = command.speed or 0
         telemetry_manager.latest_telemetry.fan.command_status = "SUCCESS"
         telemetry_manager.latest_telemetry.fan.last_command_time = get_current_time_iso()
