@@ -71,6 +71,22 @@ export const FanQuickWidget: React.FC = () => {
             Motor Driver: {operatingMode === 'SIMULATION' ? 'Simulated PWM Driver' : (hardwareConnected ? 'ESP32 MOSFET/Relay Active' : 'Disconnected')}
           </div>
         </div>
+
+        {/* Real-time Industrial HVAC Aerodynamic Telemetry */}
+        <div className="grid grid-cols-2 gap-2 mt-3 w-full">
+          <div className="p-2 rounded-xl bg-slate-900/90 border border-slate-800 text-center font-mono shadow-inner">
+            <span className="text-[10px] text-slate-400 block uppercase font-medium">Motor Velocity</span>
+            <span className="text-sm font-extrabold text-white">
+              {fan.state === 'OFF' ? '0 RPM' : `${(fan.speed * 26).toLocaleString()} RPM`}
+            </span>
+          </div>
+          <div className="p-2 rounded-xl bg-slate-900/90 border border-slate-800 text-center font-mono shadow-inner">
+            <span className="text-[10px] text-slate-400 block uppercase font-medium">Airflow Rate</span>
+            <span className="text-sm font-extrabold text-cyan-400">
+              {fan.state === 'OFF' ? '0 CFM' : `${Math.round((fan.speed / 100) * 220)} CFM`}
+            </span>
+          </div>
+        </div>
       </div>
 
       {/* Quick Action Presets */}

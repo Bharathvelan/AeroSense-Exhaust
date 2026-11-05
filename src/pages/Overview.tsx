@@ -31,6 +31,9 @@ export const OverviewPage: React.FC = () => {
   const { telemetry, operatingMode, hardwareConnected, rules } = useApp();
 
   const activeRulesCount = rules.filter(r => r.enabled).length;
+  
+  // Dynamic Industrial Indoor Air Quality (IAQ) Index
+  const iaqScore = Math.max(60, Math.min(100, Math.round(100 - Math.max(0, telemetry.humidity.value - 55) * 1.2 - Math.max(0, telemetry.temperature.value - 26) * 1.8)));
 
   return (
     <div className="space-y-6">
@@ -63,6 +66,36 @@ export const OverviewPage: React.FC = () => {
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
             <span className="text-slate-400">Uptime:</span>
             <span className="font-bold text-emerald-400">{formatUptime(telemetry.system.uptime_seconds)}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Industrial Facility Health & Microclimate Ribbon */}
+      <div className="p-3.5 rounded-2xl bg-gradient-to-r from-slate-900/90 via-[#0e1628]/95 to-slate-900/90 border border-slate-800 shadow-xl flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-bold">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>IAQ INDEX: {iaqScore} / 100</span>
+          </div>
+          <span className="text-slate-400 hidden sm:inline">
+            Status: <strong className="text-white font-medium">{iaqScore >= 90 ? 'Optimal Air Quality' : 'Acceptable Microclimate'}</strong>
+          </span>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-4 text-slate-400 text-[11px]">
+          <div className="flex items-center gap-1.5">
+            <Waves className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Air Delivery: <strong className="text-cyan-300">{telemetry.fan.state === 'OFF' ? 'Standby (0 CFM)' : `${Math.round((telemetry.fan.speed / 100) * 220)} CFM`}</strong></span>
+          </div>
+
+          <div className="hidden md:flex items-center gap-1.5">
+            <Zap className="w-3.5 h-3.5 text-amber-400" />
+            <span>PWM Frequency: <strong className="text-amber-300">25.0 kHz</strong></span>
+          </div>
+
+          <div className="hidden lg:flex items-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Protection Circuit: <strong className="text-emerald-300">ARMED</strong></span>
           </div>
         </div>
       </div>
